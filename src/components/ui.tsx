@@ -1,32 +1,36 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ArrowUpLeft, MapPin, Phone, Menu, Instagram, ChevronLeft } from 'lucide-react';
+import { ArrowLeft, ArrowUpLeft, MapPin, Phone, ChevronLeft } from 'lucide-react';
 import { addressLine, business, telHref, whatsappHref } from '@/lib/business';
+import { siteLinks as nav } from '@/lib/navigation';
+import { Navigation } from '@/components/navigation';
+import { ContactForm } from '@/components/contact-form';
 import type { FAQ, Service } from '@/lib/services';
-
-const nav = [
-  { href: '/', label: 'الرئيسية' },
-  { href: '/services', label: 'خدماتنا' },
-  { href: '/about', label: 'من نحن' },
-  { href: '/faq', label: 'أسئلة شائعة' },
-  { href: '/contact', label: 'تواصل معنا' },
-];
 
 export function Brand({ inverse = false }: { inverse?: boolean }) {
   return <Link href="/" className={`brand ${inverse ? 'brand--inverse' : ''}`} aria-label={`${business.name}، الصفحة الرئيسية`}>
-    <span className="brand__mark" aria-hidden="true"><span>ز</span></span>
+    <span className="brand__mark" aria-hidden="true"><Image src="/avatar.webp" alt="" width={56} height={56} priority /></span>
     <span className="brand__text"><strong>زايد</strong><small>للديكورات والدهانات</small></span>
   </Link>;
 }
 
+function TickerContent() {
+  return <>
+    <span>زايد للديكورات والدهانات في الرياض · دهانات جدران وتشطيبات تُناسب مساحتك وذوقك</span>
+    <span className="ticker-dot" aria-hidden="true" />
+    <span>عنواننا: {addressLine}</span>
+    <span className="ticker-dot" aria-hidden="true" />
+    <span>تواصل معنا على <b dir="ltr">{business.phoneDisplay}</b> · مفتوح على مدار الساعة</span>
+    <span className="ticker-dot" aria-hidden="true" />
+  </>;
+}
+
 export function Header() {
   return <header className="site-header">
-    <div className="site-header__top"><div className="container top-row"><span><MapPin size={14} aria-hidden="true" /> المرسلات، الرياض</span><a href={telHref} dir="ltr"><Phone size={14} aria-hidden="true" /> {business.phoneDisplay}</a></div></div>
+    <div className="site-header__top" aria-label={`زايد للديكورات والدهانات في الرياض. ${addressLine}. للتواصل ${business.phoneDisplay}. مفتوح على مدار الساعة.`}><div className="top-marquee"><div className="top-marquee__track"><div className="top-marquee__group"><TickerContent /></div><div className="top-marquee__group" aria-hidden="true"><TickerContent /></div></div></div></div>
     <div className="container header-row">
       <Brand />
-      <nav className="desktop-nav" aria-label="التنقل الرئيسي">{nav.map(item => <Link key={item.href} href={item.href}>{item.label}</Link>)}</nav>
-      <a className="header-cta" href={whatsappHref} target="_blank" rel="noopener noreferrer">اطلب استشارة <ArrowUpLeft size={17} aria-hidden="true" /></a>
-      <details className="mobile-menu"><summary aria-label="افتح القائمة"><Menu size={25} aria-hidden="true" /></summary><nav aria-label="التنقل للجوال">{nav.map(item => <Link key={item.href} href={item.href}>{item.label}<ChevronLeft size={17} aria-hidden="true" /></Link>)}</nav></details>
+      <Navigation />
     </div>
   </header>;
 }
@@ -50,13 +54,13 @@ export function Footer() {
       <div><h2>الخدمات</h2><ul><li><Link href="/services/interior-painting">الدهانات الداخلية</Link></li><li><Link href="/services/exterior-painting">الدهانات الخارجية</Link></li><li><Link href="/services/decorative-walls">ديكورات الجدران</Link></li></ul></div>
       <div><h2>تواصل معنا</h2><address><a href={business.mapsUrl} target="_blank" rel="noopener noreferrer"><MapPin size={17} aria-hidden="true" />{addressLine}</a><a href={telHref} dir="ltr"><Phone size={17} aria-hidden="true" />{business.phoneDisplay}</a></address></div>
     </div>
-    <div className="footer-bottom"><span>© {new Date().getFullYear()} {business.name}. جميع الحقوق محفوظة.</span><span>تصميم وتطوير: <strong>إسلام الشيخ</strong></span></div>
+    <div className="footer-bottom"><span className="footer-bottom__copy">© {new Date().getFullYear()} {business.name}. جميع الحقوق محفوظة.</span><span className="footer-bottom__credit">تصميم وتطوير: <strong>إسلام الشيخ</strong></span></div>
   </div></footer>;
 }
 
 export function ServiceCard({ service, index }: { service: Service; index: number }) {
   return <article className="service-card"><Link href={`/services/${service.slug}`} className="service-card__link" aria-label={`تفاصيل ${service.title}`}>
-    <div className="service-card__image"><Image src={service.image} alt={service.imageAlt} fill sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" quality={78} /><span className="service-card__number">{String(index + 1).padStart(2, '0')}</span><span className="image-note image-note--card">صورة توضيحية</span></div>
+    <div className="service-card__image"><Image src={service.image} alt={service.imageAlt} fill sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" quality={78} /><span className="service-card__number">{String(index + 1).padStart(2, '0')}</span></div>
     <div className="service-card__content"><span className="eyebrow">{service.eyebrow}</span><h3>{service.title}</h3><p>{service.summary}</p><span className="text-link">اكتشف الخدمة <ArrowLeft size={17} aria-hidden="true" /></span></div>
   </Link></article>;
 }
@@ -75,4 +79,12 @@ export function Breadcrumb({ items }: { items: { label: string; href?: string }[
 
 export function PageIntro({ eyebrow, title, body }: { eyebrow: string; title: string; body: string }) {
   return <div className="page-intro"><div className="container"><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{body}</p></div></div>;
+}
+
+export function ContactPanel() {
+  const mapSrc = `https://www.google.com/maps?q=${business.latitude},${business.longitude}&z=16&output=embed`;
+  return <section className="contact-panel section" aria-labelledby="contact-panel-heading"><div className="container">
+    <div className="contact-panel__heading"><div><span className="eyebrow">تواصل معنا</span><h2 id="contact-panel-heading">ابدأ من <em>تفاصيل مشروعك.</em></h2><p>احكِ لنا عن المساحة والخدمة التي تحتاجها، وسنجهّز بياناتك في رسالة واتساب يمكنك مراجعتها وإرسالها.</p></div><a href={telHref} dir="ltr"><Phone size={18} aria-hidden="true" /> {business.phoneDisplay}</a></div>
+    <div className="contact-panel__grid"><div className="contact-panel__form"><ContactForm /></div><div className="contact-panel__map"><iframe src={mapSrc} title={`موقع ${business.name} في حي المرسلات بالرياض`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen /><div className="contact-panel__address"><div><MapPin size={20} aria-hidden="true" /><span>{addressLine}</span></div><a href={business.mapsUrl} target="_blank" rel="noopener noreferrer">الاتجاهات على خرائط Google <ArrowUpLeft size={17} aria-hidden="true" /></a></div></div></div>
+  </div></section>;
 }
