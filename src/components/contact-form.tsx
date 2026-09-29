@@ -33,7 +33,7 @@ export function ContactForm() {
     </div>
     <div className="inquiry-form__row">
       <label>الخدمة المطلوبة <select name="service" defaultValue="" required><option value="" disabled>اختر الخدمة</option><option>الدهانات الداخلية</option><option>الدهانات الخارجية</option><option>ديكورات الجدران</option><option>استفسار عن مشروع</option></select></label>
-      <label>الحي داخل الرياض <input name="area" type="text" placeholder="مثال: المرسلات" maxLength={80} required /></label>
+      <label>الحي داخل الرياض <input name="area" type="text" placeholder="اذكر الحي الذي يقع فيه العمل" maxLength={80} required /></label>
     </div>
     <label>احكِ لنا عن فكرتك <textarea name="details" rows={4} placeholder="صف المساحة وحالة الجدار واللون أو اللمسة التي ترغب فيها" maxLength={1000} required /></label>
     <button className="button button--dark inquiry-form__submit" type="submit">جهّز الرسالة عبر واتساب <Send size={18} aria-hidden="true" /></button>

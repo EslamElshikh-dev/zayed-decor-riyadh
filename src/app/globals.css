@@ -45,3 +45,14 @@ h2 em{color:#87613d}.hero h1 em{color:var(--gold)}
 @media(max-width:700px){.site-header__top{height:36px;font-size:12px}.top-marquee__group{gap:25px;padding-inline:18px}.top-marquee__track{animation-duration:54s}.header-row{min-height:72px}.brand__mark,.brand--inverse .brand__mark{width:48px;height:48px}.brand__text strong{font-size:27px}.brand__text small{font-size:10px}.mobile-menu nav{width:min(345px,calc(100vw - 34px))}.portfolio-grid{gap:11px}.portfolio-card figcaption{font-size:14px;gap:9px;padding:10px 12px}.portfolio-card figcaption span{font-size:17px}.portfolio-card__image{aspect-ratio:1/1}.portfolio-section__source{align-items:flex-start;flex-direction:column;font-size:13px}.contact-panel__heading{align-items:flex-start;flex-direction:column;gap:13px}.contact-panel__heading h2{font-size:44px}.contact-panel__grid{grid-template-columns:1fr;gap:13px}.contact-panel__form{padding:22px 20px}.inquiry-form__row{grid-template-columns:1fr}.contact-panel__map{min-height:auto}.contact-panel__map iframe{height:330px;flex:none}.footer-bottom{align-items:stretch;padding-left:78px}.footer-bottom__credit{align-self:flex-end;margin-inline-start:0;text-align:left}}
 @media(max-width:390px){.brand__mark,.brand--inverse .brand__mark{width:44px;height:44px}.portfolio-grid{grid-template-columns:1fr}.portfolio-card__image{aspect-ratio:4/3}.inquiry-form__submit{width:100%}}
 @media(prefers-reduced-motion:reduce){.top-marquee__track{animation:none;transform:none}}
+
+.site-footer address span{display:flex;align-items:flex-start;gap:10px}
+.contact-panel__service-area{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:465px;padding:48px;background:var(--ink);color:#f2f1e9;overflow:hidden}
+.contact-panel__service-area:after{content:'ز';position:absolute;left:-30px;bottom:-115px;color:#ffffff0a;font-family:var(--font-display);font-size:420px;line-height:1;pointer-events:none}
+.contact-panel__service-area>*{position:relative;z-index:1}
+.contact-panel__service-icon{display:grid;place-items:center;width:70px;height:70px;margin-bottom:34px;border:1px solid #ffffff55;color:#e5c99b}
+.contact-panel__service-area h3{font-family:var(--font-display);font-size:clamp(38px,4vw,54px);margin:13px 0 10px}
+.contact-panel__service-area p{max-width:420px;color:#d7e0d5;font-size:16px;line-height:2;margin:0}
+.contact-panel__service-details{display:flex;flex-wrap:wrap;gap:9px;margin:25px 0 29px}
+.contact-panel__service-details span{border:1px solid #ffffff40;padding:7px 12px;font-size:13px}
+@media(max-width:700px){.contact-panel__service-area{min-height:390px;padding:34px 26px}.contact-panel__service-icon{margin-bottom:22px}}

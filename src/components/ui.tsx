@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowUpLeft, MapPin, Phone, ChevronLeft } from 'lucide-react';
-import { addressLine, business, telHref, whatsappHref } from '@/lib/business';
+import { business, telHref, whatsappHref } from '@/lib/business';
 import { siteLinks as nav } from '@/lib/navigation';
 import { Navigation } from '@/components/navigation';
 import { ContactForm } from '@/components/contact-form';
@@ -18,7 +18,7 @@ function TickerContent() {
   return <>
     <span>زايد للديكورات والدهانات في الرياض · دهانات جدران وتشطيبات تُناسب مساحتك وذوقك</span>
     <span className="ticker-dot" aria-hidden="true" />
-    <span>عنواننا: {addressLine}</span>
+    <span>نخدم العملاء في مواقعهم داخل الرياض</span>
     <span className="ticker-dot" aria-hidden="true" />
     <span>تواصل معنا على <b dir="ltr">{business.phoneDisplay}</b> · مفتوح على مدار الساعة</span>
     <span className="ticker-dot" aria-hidden="true" />
@@ -27,7 +27,7 @@ function TickerContent() {
 
 export function Header() {
   return <header className="site-header">
-    <div className="site-header__top" aria-label={`زايد للديكورات والدهانات في الرياض. ${addressLine}. للتواصل ${business.phoneDisplay}. مفتوح على مدار الساعة.`}><div className="top-marquee"><div className="top-marquee__track"><div className="top-marquee__group"><TickerContent /></div><div className="top-marquee__group" aria-hidden="true"><TickerContent /></div></div></div></div>
+    <div className="site-header__top" aria-label={`زايد للديكورات والدهانات يخدم العملاء في مواقعهم داخل الرياض. للتواصل ${business.phoneDisplay}. مفتوح على مدار الساعة.`}><div className="top-marquee"><div className="top-marquee__track"><div className="top-marquee__group"><TickerContent /></div><div className="top-marquee__group" aria-hidden="true"><TickerContent /></div></div></div></div>
     <div className="container header-row">
       <Brand />
       <Navigation />
@@ -52,7 +52,7 @@ export function Footer() {
       <div className="footer-intro"><Brand inverse /><p>ألوان مدروسة، تفاصيل متناسقة، ومساحة تعكس ذوقك. دهانات وديكورات في الرياض.</p></div>
       <div><h2>استكشف الموقع</h2><ul>{nav.map(item => <li key={item.href}><Link href={item.href}>{item.label}</Link></li>)}</ul></div>
       <div><h2>الخدمات</h2><ul><li><Link href="/services/interior-painting">الدهانات الداخلية</Link></li><li><Link href="/services/exterior-painting">الدهانات الخارجية</Link></li><li><Link href="/services/decorative-walls">ديكورات الجدران</Link></li></ul></div>
-      <div><h2>تواصل معنا</h2><address><a href={business.mapsUrl} target="_blank" rel="noopener noreferrer"><MapPin size={17} aria-hidden="true" />{addressLine}</a><a href={telHref} dir="ltr"><Phone size={17} aria-hidden="true" />{business.phoneDisplay}</a></address></div>
+      <div><h2>تواصل معنا</h2><address><span><MapPin size={17} aria-hidden="true" />نخدم الرياض في مواقع العملاء</span><a href={telHref} dir="ltr"><Phone size={17} aria-hidden="true" />{business.phoneDisplay}</a></address></div>
     </div>
     <div className="footer-bottom"><span className="footer-bottom__copy">© {new Date().getFullYear()} {business.name}. جميع الحقوق محفوظة.</span><span className="footer-bottom__credit">تصميم وتطوير: <strong>إسلام الشيخ</strong></span></div>
   </div></footer>;
@@ -82,9 +82,8 @@ export function PageIntro({ eyebrow, title, body }: { eyebrow: string; title: st
 }
 
 export function ContactPanel() {
-  const mapSrc = `https://www.google.com/maps?q=${business.latitude},${business.longitude}&z=16&output=embed`;
   return <section className="contact-panel section" aria-labelledby="contact-panel-heading"><div className="container">
     <div className="contact-panel__heading"><div><span className="eyebrow">تواصل معنا</span><h2 id="contact-panel-heading">ابدأ من <em>تفاصيل مشروعك.</em></h2><p>احكِ لنا عن المساحة والخدمة التي تحتاجها، وسنجهّز بياناتك في رسالة واتساب يمكنك مراجعتها وإرسالها.</p></div><a href={telHref} dir="ltr"><Phone size={18} aria-hidden="true" /> {business.phoneDisplay}</a></div>
-    <div className="contact-panel__grid"><div className="contact-panel__form"><ContactForm /></div><div className="contact-panel__map"><iframe src={mapSrc} title={`موقع ${business.name} في حي المرسلات بالرياض`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen /><div className="contact-panel__address"><div><MapPin size={20} aria-hidden="true" /><span>{addressLine}</span></div><a href={business.mapsUrl} target="_blank" rel="noopener noreferrer">الاتجاهات على خرائط Google <ArrowUpLeft size={17} aria-hidden="true" /></a></div></div></div>
+    <div className="contact-panel__grid"><div className="contact-panel__form"><ContactForm /></div><div className="contact-panel__service-area"><span className="contact-panel__service-icon"><MapPin size={38} aria-hidden="true" /></span><span className="eyebrow eyebrow--light">نطاق خدمتنا · الرياض</span><h3>نأتي إلى موقعك.</h3><p>نعمل في مواقع العملاء داخل الرياض، ولا يوجد مقر لاستقبال الزوار. أرسل لنا الحي وصور المساحة لنناقش طلبك.</p><div className="contact-panel__service-details"><span>خدمة في موقع العميل</span><span>متاحون على مدار الساعة</span></div><a className="button button--cream" href={whatsappHref} target="_blank" rel="noopener noreferrer"><WhatsappIcon size={19} /> أرسل موقع العمل</a></div></div>
   </div></section>;
 }

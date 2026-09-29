@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { addressLine, business, origin } from './business';
+import { business, origin } from './business';
 import { services } from './services';
 
 export function pageMetadata(title: string, description: string, path: string, image?: string): Metadata {
@@ -22,15 +22,6 @@ export const localBusinessSchema = {
   url: origin,
   telephone: business.phoneE164,
   image: `${origin}/og.jpg`,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: `${business.streetAddress}، ${business.neighborhood}، ${business.additionalCode}`,
-    addressLocality: business.city,
-    postalCode: business.postalCode,
-    addressCountry: business.country,
-  },
-  geo: { '@type': 'GeoCoordinates', latitude: business.latitude, longitude: business.longitude },
-  hasMap: business.mapsUrl,
   openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '00:00', closes: '23:59' }],
   areaServed: { '@type': 'City', name: business.city },
   availableLanguage: 'ar',
@@ -44,5 +35,3 @@ export function breadcrumbSchema(items: { name: string; path: string }[]) {
 export function JsonLd({ value }: { value: object }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(value).replace(/</g, '\\u003c') }} />;
 }
-
-export { addressLine };
