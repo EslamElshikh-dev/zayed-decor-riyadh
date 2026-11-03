@@ -5,6 +5,7 @@ import { JsonLd, localBusinessSchema } from '@/lib/seo';
 import './globals.css';
 
 export const metadata: Metadata = {
+  creator: "المهندس إسلام الشيخ",
   metadataBase: new URL(origin),
   title: { default: `${business.name} | دهانات وديكورات في الرياض`, template: `%s | ${business.name}` },
   description: business.description,

@@ -1,3 +1,4 @@
+import { EslamDeveloperSignature } from "../../components/eslam-developer-credit";
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowUpLeft, MapPin, Phone, ChevronLeft } from 'lucide-react';
@@ -54,7 +55,7 @@ export function Footer() {
       <div><h2>الخدمات</h2><ul><li><Link href="/services/interior-painting">الدهانات الداخلية</Link></li><li><Link href="/services/exterior-painting">الدهانات الخارجية</Link></li><li><Link href="/services/decorative-walls">ديكورات الجدران</Link></li></ul></div>
       <div><h2>تواصل معنا</h2><address><span><MapPin size={17} aria-hidden="true" />نخدم الرياض في مواقع العملاء</span><a href={telHref} dir="ltr"><Phone size={17} aria-hidden="true" />{business.phoneDisplay}</a></address></div>
     </div>
-    <div className="footer-bottom"><span className="footer-bottom__copy">© {new Date().getFullYear()} {business.name}. جميع الحقوق محفوظة.</span><span className="footer-bottom__credit">تصميم وتطوير: <strong>إسلام الشيخ</strong></span></div>
+    <div className="footer-bottom"><span className="footer-bottom__copy">© {new Date().getFullYear()} {business.name}. جميع الحقوق محفوظة.</span><EslamDeveloperSignature /></div>
   </div></footer>;
 }
 
